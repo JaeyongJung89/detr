@@ -1,5 +1,7 @@
 .nfs*
 *.ipynb
+# ...but DO track the hands-on tutorial notebooks (overrides *.ipynb above)
+!tutorial/**/*.ipynb
 *.pyc
 .dumbo.json
 .DS_Store
@@ -15,3 +17,13 @@ experiment-*
 .mypy_cache/*
 not_tracked_dir/
 .vscode
+
+# --- uv / local environment ---
+# (uv also drops a self-ignoring .gitignore inside .venv, this is belt-and-braces)
+.venv/
+.python-version
+# NOTE: uv.lock is intentionally NOT ignored -- commit it so the env is reproducible.
+
+# --- tutorial scratch ---
+# downloaded sample images, cached checkpoints, generated figures
+tutorial/_assets/

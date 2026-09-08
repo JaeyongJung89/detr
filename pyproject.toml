@@ -1,0 +1,36 @@
+[project]
+name = "detr-tutorial"
+version = "0.1.0"
+description = "Hands-on tutorial environment for DETR (End-to-End Object Detection with Transformers)"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+
+dependencies = [
+    # --- core model ---
+    "torch>=2.2",
+    "torchvision>=0.17",
+    "scipy>=1.11",        # linear_sum_assignment -> the Hungarian matcher
+
+    # --- tutorial / visualization ---
+    "matplotlib>=3.8",
+    "pillow>=10.0",
+    "requests>=2.31",
+    "numpy>=1.26",
+
+    # --- notebooks ---
+    "ipykernel>=6.29",
+    "ipywidgets>=8.1",
+]
+
+[project.optional-dependencies]
+# COCO evaluation only. Needs a C build step, so it is kept out of the
+# default install -- the tutorial notebooks do not require it.
+#   uv sync --extra coco
+coco = [
+    "cython>=3.0",
+    "pycocotools>=2.0.7",
+]
+
+[tool.uv]
+# This repo is a collection of scripts, not an installable package.
+package = false
