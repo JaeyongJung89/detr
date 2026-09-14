@@ -65,7 +65,23 @@ Read them in order — each builds on the last. `00` doubles as a standalone ref
 
 Every notebook ends with **exercises that have worked solutions** in collapsible `<details>` blocks. Try them before opening the answer — they're where the understanding actually sticks.
 
-`detr_utils.py` holds the shared boilerplate (COCO class names, plotting, model loading) so the notebooks stay focused. It also puts the repo root on `sys.path`, which is why `from models.detr import DETR` works from inside `tutorial/`.
+### Every notebook stands alone
+
+Each notebook imports **only third-party packages** — `torch`, `torchvision`, `numpy`, `matplotlib`, `PIL`, `requests`. Nothing is imported from this repo, and nothing is hidden in a helper module. Section 0 of each notebook writes out everything it needs, so you can read straight through without ever chasing a function into another file.
+
+That means the pieces are implemented, not imported:
+
+| Notebook | Written out from scratch |
+|---|---|
+| `00` | `MLP`, `FrozenBatchNorm2d`, the transformer stack, box IoU / GIoU |
+| `03` | `NestedTensor` and padding masks, sine positional encoding |
+| `05` | **the Hungarian algorithm itself**, the cost matrix, the full set loss |
+| `07` | the matcher, the set loss with auxiliary decoder losses, the training loop |
+| `08` | the whole model, in 50 lines |
+
+Where a notebook builds DETR, the proof it got the architecture right is `load_state_dict(...)` on Facebook's released checkpoint: that call is **strict**, so every parameter name has to line up exactly or it raises.
+
+`detr_utils.py` is still there for your own scripts, but no notebook uses it.
 
 ### If you're short on time
 
